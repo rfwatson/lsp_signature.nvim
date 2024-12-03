@@ -708,7 +708,7 @@ local signature = function(opts)
     end
   end
 
-  local params = vim.lsp.util.make_position_params()
+  local params = vim.lsp.util.make_position_params(0, "utf-8")
   log('change trigger pos to ', params.position.character, trigger_position)
   local shift = math.max(1, trigger_position - 0)
   params.position.character = shift
@@ -1074,7 +1074,7 @@ M.check_signature_should_close = function()
       status_line = { hint = '', label = '' }
       return
     end
-    local params = vim.lsp.util.make_position_params()
+    local params = vim.lsp.util.make_position_params(0, "utf-8")
     params.position.character = math.max(trigger_position, 1)
     line = api.nvim_get_current_line()
     line_to_cursor = line:sub(1, pos[2])
@@ -1148,7 +1148,7 @@ M.toggle_float_win = function()
     return _LSP_SIG_CFG.floating_window
   end
 
-  local params = vim.lsp.util.make_position_params()
+  local params = vim.lsp.util.make_position_params(0, "utf-8")
   local pos = api.nvim_win_get_cursor(0)
   local line = api.nvim_get_current_line()
   local line_to_cursor = line:sub(1, pos[2])
